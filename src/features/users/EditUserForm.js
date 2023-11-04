@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { ROLES } from "../../config/roles"
 
+// Regular expressions for input validation
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
+// Define the EditUserForm component
 const EditUserForm = ({ user }) => {
-
+    // Redux mutation hooks for updating and deleting a user
     const [updateUser, {
         isLoading,
         isSuccess,
@@ -23,8 +25,10 @@ const EditUserForm = ({ user }) => {
         error: delerror
     }] = useDeleteUserMutation()
 
+    // React Router's navigation hook
     const navigate = useNavigate()
 
+    // State variables for form inputs and validation
     const [username, setUsername] = useState(user.username)
     const [validUsername, setValidUsername] = useState(false)
     const [password, setPassword] = useState('')
@@ -32,6 +36,7 @@ const EditUserForm = ({ user }) => {
     const [roles, setRoles] = useState(user.roles)
     const [active, setActive] = useState(user.active)
 
+    // Use effects to validate form inputs
     useEffect(() => {
         setValidUsername(USER_REGEX.test(username))
     }, [username])
@@ -40,20 +45,20 @@ const EditUserForm = ({ user }) => {
         setValidPassword(PWD_REGEX.test(password))
     }, [password])
 
+    // Use effect to handle successful updates or deletes
     useEffect(() => {
-        console.log(isSuccess)
         if (isSuccess || isDelSuccess) {
+            // Clear form fields and navigate back to the users list
             setUsername('')
             setPassword('')
             setRoles([])
             navigate('/dash/users')
         }
-
     }, [isSuccess, isDelSuccess, navigate])
 
+    // Event handlers for form input changes
     const onUsernameChanged = e => setUsername(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
-
     const onRolesChanged = e => {
         const values = Array.from(
             e.target.selectedOptions,
@@ -61,9 +66,9 @@ const EditUserForm = ({ user }) => {
         )
         setRoles(values)
     }
-
     const onActiveChanged = () => setActive(prev => !prev)
 
+    // Event handler for saving a user
     const onSaveUserClicked = async (e) => {
         if (password) {
             await updateUser({ id: user.id, username, password, roles, active })
@@ -72,20 +77,22 @@ const EditUserForm = ({ user }) => {
         }
     }
 
+    // Event handler for deleting a user
     const onDeleteUserClicked = async () => {
         await deleteUser({ id: user.id })
     }
 
+    // Generate role options for the select input
     const options = Object.values(ROLES).map(role => {
         return (
             <option
                 key={role}
                 value={role}
-
-            > {role}</option >
+            > {role}</option>
         )
     })
 
+    // Determine if the "Save" button should be enabled
     let canSave
     if (password) {
         canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
@@ -93,14 +100,18 @@ const EditUserForm = ({ user }) => {
         canSave = [roles.length, validUsername].every(Boolean) && !isLoading
     }
 
+    // Determine the CSS class for error messages
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
+
+    // Determine the CSS classes for input validation
     const validUserClass = !validUsername ? 'form__input--incomplete' : ''
     const validPwdClass = password && !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
 
+    // Get the error message content
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
-
+    // Render the form content
     const content = (
         <>
             <p className={errClass}>{errContent}</p>
@@ -174,11 +185,13 @@ const EditUserForm = ({ user }) => {
                 >
                     {options}
                 </select>
-
             </form>
         </>
     )
 
+    // Return the form content
     return content
 }
+
+// Export the EditUserForm component as the default export
 export default EditUserForm

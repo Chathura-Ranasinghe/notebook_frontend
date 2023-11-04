@@ -1,10 +1,16 @@
+// Import the 'Link' component from the 'react-router-dom' library.
+// The 'Link' component is a part of the 'react-router-dom' library,
+// which is commonly used in React applications for creating
+// navigation links and handling client-side routing. It allows
+// you to define links that, when clicked, will render the
+// specified route or page without causing a full page reload.
 import { Link } from 'react-router-dom'
 
 const Public = () => {
     const content = (
         <section className="public">
             <header>
-                <h1>Welcome to <span className="nowrap">Dan D. Repairs!</span></h1>
+                <h1>Welcome to <span className="nowrap">Mangala Trade Center!</span></h1>
             </header>
             <main className="public__main">
                 <p>Located in Beautiful Downtown Foo City, Dan D. Repairs  provides a trained staff ready to meet your tech repair needs.</p>
