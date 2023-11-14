@@ -11,8 +11,10 @@ const NewNote = () => {
     // Use useSelector to select all users from Redux state
     const users = useSelector(selectAllUsers)
 
+    if (!users?.length) return <p>Not Currently Available</p>
+
     // Create content based on whether the users data is available
-    const content = users ? <NewNoteForm users={users} /> : <p>Loading...</p>
+    const content = <NewNoteForm users={users} />
 
     // Return the content (either the new note form or a loading message)
     return content
