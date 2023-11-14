@@ -10,7 +10,7 @@ const NotesList = () => {
         isSuccess,        // Flag indicating if data was successfully fetched
         isError,          // Flag indicating if an error occurred
         error             // Error object (if isError is true)
-    } = useGetNotesQuery(undefined, {
+    } = useGetNotesQuery('notesList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true

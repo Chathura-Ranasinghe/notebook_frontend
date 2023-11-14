@@ -10,7 +10,7 @@ const UsersList = () => {
         isSuccess,      // Flag indicating if data was successfully fetched
         isError,        // Flag indicating if an error occurred
         error           // Error object (if isError is true)
-    } = useGetUsersQuery(undefined, {
+    } = useGetUsersQuery('usersList', {
         pollingInterval: 60000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
