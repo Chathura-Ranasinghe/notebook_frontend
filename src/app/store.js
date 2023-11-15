@@ -14,7 +14,7 @@ export const store = configureStore({
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(apiSlice.middleware),
     // Enable Redux DevTools for debugging
-    devTools: true
+    devTools: false
 })
 
 // Set up listeners for automatic action dispatches in response to API query endpoints

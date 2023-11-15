@@ -15,6 +15,10 @@ import { store } from './app/store';
 // Import the 'Provider' component from the 'react-redux' library.
 import { Provider } from 'react-redux';
 
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+if (process.env.NODE_ENV === 'production') disableReactDevTools()
+
 // Wrap your React application with the 'Provider' component
 // to make the Redux store available to all components.
 
