@@ -1,24 +1,21 @@
-import { useSelector } from 'react-redux'
-
-// Import the selector to retrieve all users
-import { selectAllUsers } from '../users/usersApiSlice'
-
-// Import the component for creating a new note
 import NewNoteForm from './NewNoteForm'
+import { useGetUsersQuery } from '../users/usersApiSlice'
+import PulseLoader from 'react-spinners/BeatLoader'
+import useTitle from '../../hooks/useTitle'
 
-// Define a functional component for creating a new note
 const NewNote = () => {
-    // Use useSelector to select all users from Redux state
-    const users = useSelector(selectAllUsers)
+    useTitle('techNotes: New Note')
 
-    if (!users?.length) return <p>Not Currently Available</p>
+    const { users } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            users: data?.ids.map(id => data?.entities[id])
+        }),
+    })
 
-    // Create content based on whether the users data is available
+    if (!users?.length) return <PulseLoader color={"#FFF"} />
+
     const content = <NewNoteForm users={users} />
 
-    // Return the content (either the new note form or a loading message)
     return content
 }
-
-// Export the NewNote component as the default export
 export default NewNote

@@ -2,13 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from 'react-router-dom'
 
-import { useSelector } from 'react-redux'
-import { selectUserById } from './usersApiSlice'
+//import { useSelector } from 'react-redux'
+//import { selectUserById } from './usersApiSlice'
+import { useGetUsersQuery } from './usersApiSlice'
+import { memo } from 'react'
 
 // A component for displaying user information.
 const User = ({ userId }) => {
     // Use the 'selectUserById' selector to get user data by 'userId'.
-    const user = useSelector(state => selectUserById(state, userId))
+    const { user } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            user: data?.entities[userId]
+        }),
+    })
 
     // Get the 'navigate' function from 'react-router-dom' for navigation.
     const navigate = useNavigate()
@@ -48,4 +54,6 @@ const User = ({ userId }) => {
     }
 }
 
-export default User  // Export the 'User' component.
+const memoizedUser = memo(User)
+
+export default memoizedUser  // Export the 'User' component.

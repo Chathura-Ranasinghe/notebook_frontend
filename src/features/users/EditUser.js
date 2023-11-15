@@ -1,26 +1,24 @@
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
-// Import the selector to retrieve user data by ID
-import { selectUserById } from './usersApiSlice'
-
-// Import the component for editing user information
 import EditUserForm from './EditUserForm'
+import { useGetUsersQuery } from './usersApiSlice'
+import PulseLoader from 'react-spinners/BeatLoader'
+import useTitle from '../../hooks/useTitle'
 
-// Define a functional component for editing a user
 const EditUser = () => {
-    // Extract the "id" parameter from the route using useParams
+    useTitle('techNotes: Edit User')
+
     const { id } = useParams()
 
-    // Use the useSelector hook to select user data by ID from Redux state
-    const user = useSelector(state => selectUserById(state, id))
+    const { user } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            user: data?.entities[id]
+        }),
+    })
 
-    // Create content based on whether the user data is available
-    const content = user ? <EditUserForm user={user} /> : <p>Loading...</p>
+    if (!user) return <PulseLoader color={"#FFF"} />
 
-    // Render the content (either the edit form or a loading message)
+    const content = <EditUserForm user={user} />
+
     return content
 }
-
-// Export the EditUser component as the default export
 export default EditUser

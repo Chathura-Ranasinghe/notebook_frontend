@@ -2,13 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from 'react-router-dom'
 
-import { useSelector } from 'react-redux'
-import { selectNoteById } from './notesApiSlice'
+//import { useSelector } from 'react-redux'
+//import { selectNoteById } from './notesApiSlice'
+import { useGetNotesQuery } from './notesApiSlice'
+import { memo } from 'react'
 
 // A component for displaying a single note.
 const Note = ({ noteId }) => {
     // Use the 'selectNoteById' selector to get the note data by 'noteId'.
-    const note = useSelector(state => selectNoteById(state, noteId))
+    const { note } = useGetNotesQuery("notesList", {
+        selectFromResult: ({ data }) => ({
+            note: data?.entities[noteId]
+        }),
+    })
 
     // Get the 'navigate' function from 'react-router-dom' for navigation.
     const navigate = useNavigate()
@@ -52,4 +58,6 @@ const Note = ({ noteId }) => {
     }
 }
 
-export default Note  // Export the 'Note' component.
+const memoizedNote = memo(Note)
+
+export default memoizedNote  // Export the 'memoizedNote' component.

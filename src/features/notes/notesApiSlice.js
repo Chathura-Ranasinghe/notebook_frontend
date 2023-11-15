@@ -19,10 +19,12 @@ export const notesApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         // Define an API query for fetching notes
         getNotes: builder.query({
-            query: () => '/notes',
-            validateStatus: (response, result) => {
-                return response.status === 200 && !result.isError
-            },
+            query: () => ({
+                url: '/notes',
+                validateStatus: (response, result) => {
+                    return response.status === 200 && !result.isError
+                },
+            }),
             // Transform the response data and update the state with it
             transformResponse: responseData => {
                 const loadedNotes = responseData.map(note => {

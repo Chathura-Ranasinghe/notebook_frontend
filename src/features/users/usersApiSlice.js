@@ -15,10 +15,12 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         // Define a query to fetch users from the API
         getUsers: builder.query({
-            query: () => '/users',
-            validateStatus: (response, result) => {
-                return response.status === 200 && !result.isError
-            },
+            query: () => ({
+                url: '/users',
+                validateStatus: (response, result) => {
+                    return response.status === 200 && !result.isError
+                },
+            }),
             transformResponse: responseData => {
                 // Transform the API response data to match the entity adapter's format
                 const loadedUsers = responseData.map(user => {
