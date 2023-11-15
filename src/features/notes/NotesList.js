@@ -1,45 +1,43 @@
-import { useGetNotesQuery } from "./notesApiSlice";
-import Note from "./Note";
+import { useGetNotesQuery } from "./notesApiSlice"
+import Note from "./Note"
+import useAuth from "../../hooks/useAuth"
 
-// Component for displaying a list of notes.
 const NotesList = () => {
-    // Use the 'useGetNotesQuery' hook from your API slice to fetch notes data.
+
+    const { username, isTeacher, isAdmin } = useAuth()
+
     const {
-        data: notes,      // Fetched notes data
-        isLoading,        // Flag indicating if data is loading
-        isSuccess,        // Flag indicating if data was successfully fetched
-        isError,          // Flag indicating if an error occurred
-        error             // Error object (if isError is true)
+        data: notes,
+        isLoading,
+        isSuccess,
+        isError,
+        error
     } = useGetNotesQuery('notesList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
     })
 
-    let content;  // Variable to hold the content to be rendered.
+    let content
 
-    if (isLoading) {
-        content = <p>Loading...</p>;  // Display a loading message while fetching data.
-    }
+    if (isLoading) content = <p>Loading...</p>
 
     if (isError) {
-        content = (
-            <p className="errmsg">
-                {error?.data?.message}  {/* Display the error message if an error occurred */}
-            </p>
-        );
+        content = <p className="errmsg">{error?.data?.message}</p>
     }
 
     if (isSuccess) {
-        // Extract the 'ids' from the fetched notes data.
-        const { ids } = notes;
+        const { ids, entities } = notes
 
-        // Generate content for the table based on the note IDs.
-        const tableContent = ids?.length
-            ? ids.map(noteId => <Note key={noteId} noteId={noteId} />)
-            : null;
+        let filteredIds
+        if (isTeacher || isAdmin) {
+            filteredIds = [...ids]
+        } else {
+            filteredIds = ids.filter(noteId => entities[noteId].username === username)
+        }
 
-        // Render a table with headers and the generated content.
+        const tableContent = ids?.length && filteredIds.map(noteId => <Note key={noteId} noteId={noteId} />)
+
         content = (
             <table className="table table--notes">
                 <thead className="table__thead">
@@ -53,13 +51,12 @@ const NotesList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tableContent}  {/* Display the generated table content */}
+                    {tableContent}
                 </tbody>
             </table>
-        );
+        )
     }
 
-    return content;  // Return the content to be rendered.
-};
-
-export default NotesList;  // Export the 'NotesList' component.
+    return content
+}
+export default NotesList
