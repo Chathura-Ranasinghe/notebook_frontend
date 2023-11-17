@@ -4,23 +4,23 @@ import { jwtDecode } from 'jwt-decode'
 
 const useAuth = () => {
     const token = useSelector(selectCurrentToken)
-    let isTeacher = false
+    let isManager = false
     let isAdmin = false
-    let status = "Student"
+    let status = "Employee"
 
     if (token) {
         const decoded = jwtDecode(token)
         const { username, roles } = decoded.UserInfo
 
-        isTeacher = roles.includes('Teacher')
+        isManager = roles.includes('Manager')
         isAdmin = roles.includes('Admin')
 
-        if (isTeacher) status = "Teacher"
+        if (isManager) status = "Manager"
         if (isAdmin) status = "Admin"
 
-        return { username, roles, status, isTeacher, isAdmin }
+        return { username, roles, status, isManager, isAdmin }
     }
 
-    return { username: '', roles: [], isTeacher, isAdmin, status }
+    return { username: '', roles: [], isManager, isAdmin, status }
 }
 export default useAuth

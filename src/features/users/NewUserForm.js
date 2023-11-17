@@ -27,7 +27,7 @@ const NewUserForm = () => {
     const [validUsername, setValidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
-    const [roles, setRoles] = useState(["Student"])
+    const [roles, setRoles] = useState(["Employee"])
 
     // Use effects to validate form inputs
     useEffect(() => {
