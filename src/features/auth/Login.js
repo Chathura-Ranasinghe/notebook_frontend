@@ -7,6 +7,9 @@ import { useLoginMutation } from './authApiSlice'
 
 import usePersist from '../../hooks/usePersist'
 
+//import './Login.css'; // Import the CSS file
+//import { RiLoginBoxLine } from "react-icons/ri";
+
 const Login = () => {
     const userRef = useRef()
     const errRef = useRef()
@@ -61,12 +64,12 @@ const Login = () => {
 
     const content = (
         <section className="public">
-            <header>
-                <h1>Employee Login</h1>
-            </header>
+            <div className='layer'></div>
             <main className="login">
-                <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
-
+                <div>
+                    <header className='public__main'>
+                        <h1>Login</h1>
+                    </header>
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -103,8 +106,10 @@ const Login = () => {
                         Trust This Device
                     </label>
                 </form>
+                </div>
             </main>
-            <footer>
+            <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
+            <footer className='footer-button'>
                 <Link to="/">Back to Home</Link>
             </footer>
         </section>

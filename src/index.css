@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap');
 
 * {
   margin: 0;
@@ -28,10 +28,11 @@
 /* || UTILITY CLASSES */
 .errmsg {
   display: inline-block;
-  background-color: var(--TABLE-BGCOLOR);
+  background-color: rgba(10, 10, 10, 0.2);
   color: var(--ERROR);
-  padding: 0.25em;
-  margin-bottom: 0.5em;
+  padding: 0.25em 0.5em;
+  font-size: 1rem;
+  margin-bottom: 1em;
 }
 
 .errmsg a:any-link {
@@ -46,17 +47,19 @@
 .icon-button {
   width: 48px;
   height: 48px;
-  font-size: 2.5rem;
+  font-size: 2rem;
   background-color: transparent;
   border: none;
   color: var(--COLOR);
   display: grid;
+  cursor: pointer;
   place-content: center;
+  transition: ease-out 0.2s;
 }
 
 .icon-button:hover,
 .icon-button:focus-visible {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .icon-button[disabled] {
@@ -66,11 +69,11 @@
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Yantramanav', sans-serif;
   min-height: 100vh;
-  background-color: var(--BGCOLOR);
+  background-color: rgba(10, 10, 10, 0.95);
   color: var(--COLOR);
-  background-image: url('./img/background.jpg');
+  background-image: url('./img/background.jpeg');
   background-size: cover;
   background-position: top right;
   background-blend-mode: multiply;
@@ -109,60 +112,116 @@ a:focus-visible {
 .welcome {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
+
 
 .public {
   padding: 1em;
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+}
+
+.public footer{
+  margin-bottom: 50px;
+}
+
+.footer-button a{
+  border: 2px solid #FF9209;
+  background-color: transparent;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 400;
+  transition: ease-out 0.2s
+}
+
+.footer-button a:hover{
+  border: 2px solid #FF9209;
+  background-color: #FF9209;
+  color: #000;
 }
 
 .public__main,
 .login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
   flex-grow: 1;
-  border-top: 2px solid var(--BORDER-COLOR);
-  border-bottom: 2px solid var(--BORDER-COLOR);
-  padding: 1em 0;
+  padding: 1em;
 }
 
-.public__addr {
-  margin-top: 1em;
+.public .public__main h1{
+  text-transform: uppercase;
+  font-size: 45px;
+  font-weight: 900;
+}
+
+.public__main span{
+  color: #FF9209;
+}
+
+.public .public__main p{
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .welcome a::before {
+  color: #FF9209;
   content: "➜ "
+}
+
+.welcome span{
+  color: #FF9209;
+  text-transform: capitalize;
+}
+
+.welcome p{
+  font-style: 2.5rem;
 }
 
 /* || DASH HEADER, CONTAINER & FOOTER */
 
 .dash-header {
+  text-align: center;
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--BGCOLOR);
-  padding: 0 0.5em;
-  border-bottom: 1px solid var(--BORDER-COLOR);
 }
 
 .dash-header__container {
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
-.dash-header__container--small {
-  max-width: 800px;
+.dash-header__container h1{
+  padding: 20px 0px 5px 0px ;
+  text-transform: uppercase;
+  font-size: 45px;
+  font-weight: 900;
 }
 
 .dash-header__nav {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
+  text-align: center;
+  justify-content: center;
+  background-color: #FF9209;
   gap: 0.5em;
+  width: 100vw;
 }
 
 .dash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
   padding: 0.75em 0.5em 0.5em;
   flex-grow: 1;
 }
@@ -172,13 +231,28 @@ a:focus-visible {
   position: sticky;
   bottom: 0;
   z-index: 1;
-  background-color: var(--BGCOLOR);
-  padding: 0.5em;
-  border-top: 1px solid var(--BORDER-COLOR);
+  background-color: #FF9209;
+  padding: 20px;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
+  flex-direction: row-reverse;
   gap: 1em;
+}
+
+.user_data{
+  display: flex;
+  gap: 1em;
+}
+
+.dash-footer p{
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dash-footer span{
+  color: #000;
+  text-transform: capitalize;
 }
 
 .dash-footer__button {
@@ -283,15 +357,36 @@ tr {
   align-items: center;
 }
 
+.form__title-row span{
+  color: #FF9209;
+}
+
 .form__input,
 .form__submit-button {
+  min-width: 250px;
   padding: 0.5em;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .form__input--text {
   min-height: 150px;
 }
+
+.form__submit-button{
+  color: black;
+  border: 2px solid #FF9209;
+  background-color: darkorange;
+  cursor: pointer;
+  transition: ease-out 0.2s;
+  font-weight: 500;
+}
+
+.form__submit-button:hover{
+  border: 2px solid #FF9209;
+  background-color: transparent;
+  color: white;
+}
+
 
 .form__input--incomplete {
   border: 1px solid var(--INPUT-INVALID);
@@ -299,6 +394,7 @@ tr {
 }
 
 .form__checkbox {
+  cursor: pointer;
   width: 24px;
   height: 24px;
 }
@@ -329,26 +425,32 @@ tr {
   gap: 0.5em;
 }
 
-@media screen and (max-width: 400px) {
+
+@media screen and (min-width: 400px) {
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .dash-header__nav {
     gap: 0;
   }
 
-  .icon-button {
-    font-size: 1.5rem;
-  }
 }
-
 
 @media screen and (min-width: 768px) {
 
   body {
     font-size: 1.25rem;
   }
+
+  .welcome h1{
+    font-size: 2.5rem;
+  }
+
+  .welcome p{
+    font-size: 1.5rem;
+  }
+
 
   .dash-header {
     padding: 0 1em;
@@ -375,4 +477,71 @@ tr {
   .form__action-buttons {
     position: static;
   }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .welcome h1{
+    font-size: 2.25rem;
+  }
+
+  .welcome p{
+    font-size: 1.5rem;
+  }
+
+  .dash-header__container h1{
+    font-size: 40px;
+  }
+
+  .dash-footer .user_data{
+    line-height: 1;
+    display:block;
+    gap: 0em;
+  }
+
+  .dash-footer .user_data p{
+    font-size: 1rem;
+  }
+  
+  .dash-footer .date_time{
+    padding-bottom: 10px;
+    font-size: 1rem;
+  }
+
+  .icon-button {
+    width: 45px;
+    height: 40px;
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .dash-header {
+    background-color: #000;
+  }
+
+  .welcome h1{
+    font-size: 2.25rem;
+  }
+
+  .welcome p{
+    font-size: 1.25rem;
+  }
+
+  .dash-header__container h1{
+    font-size: 35px;
+  }
+
+  .icon-button {
+    width: 45px;
+    height: 35px;
+    font-size: 1.5rem;
+  }
+
+  .welcome h1{
+    font-size: 2rem;
+  }
+
 }

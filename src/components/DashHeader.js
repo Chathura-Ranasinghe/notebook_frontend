@@ -10,7 +10,7 @@ import {
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
-
+import { faHouse } from "@fortawesome/free-solid-svg-icons"
 import useAuth from '../hooks/useAuth'
 
 const DASH_REGEX = /^\/dash(\/)?$/
@@ -108,6 +108,21 @@ const DashHeader = () => {
         </button>
     )
 
+    const onGoHomeClicked = () => navigate('/dash')
+
+    let goHomeButton = null
+    if (pathname !== '/dash') {
+        goHomeButton = (
+            <button
+                className="icon-button"
+                title="Home"
+                onClick={onGoHomeClicked}
+            >
+                <FontAwesomeIcon icon={faHouse} />
+            </button>
+        )
+    }
+
     const errClass = isError ? "errmsg" : "offscreen"
 
     let buttonContent
@@ -116,6 +131,7 @@ const DashHeader = () => {
     } else {
         buttonContent = (
             <>
+                {goHomeButton}
                 {newNoteButton}
                 {newUserButton}
                 {notesButton}
@@ -132,7 +148,7 @@ const DashHeader = () => {
             <header className="dash-header">
                 <div className={`dash-header__container ${dashClass}`}>
                     <Link to="/dash">
-                        <h1 className="dash-header__title">techNotes</h1>
+                        <h1 className="dash-header__title">Mangala Trade Center</h1>
                     </Link>
                     <nav className="dash-header__nav">
                         {buttonContent}
