@@ -72,8 +72,6 @@ const NewNoteForm = ({ users }) => {
     const content = (
         <>
             {/* Display error messages if an error occurs */}
-            <p className={errClass}>{error?.data?.message}</p>
-
             {/* Render the form */}
             <form className="form" onSubmit={onSaveNoteClicked}>
                 <div className="form__title-row">
@@ -90,7 +88,7 @@ const NewNoteForm = ({ users }) => {
                     </div>
                 </div>
                 <label className="form__label" htmlFor="title">
-                    Title:</label>
+                    Title: <p className={errClass}>{error?.data?.message}</p></label>
                 <input
                     className={`form__input ${validTitleClass}`}
                     id="title"
@@ -100,7 +98,6 @@ const NewNoteForm = ({ users }) => {
                     value={title}
                     onChange={onTitleChanged}
                 />
-
                 <label className="form__label" htmlFor="text">
                     Text:</label>
                 <textarea

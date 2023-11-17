@@ -30,9 +30,8 @@
   display: inline-block;
   background-color: rgba(10, 10, 10, 0.2);
   color: var(--ERROR);
-  padding: 0.25em 0.5em;
   font-size: 1rem;
-  margin-bottom: 1em;
+  font-weight: 700;
 }
 
 .errmsg a:any-link {
@@ -532,6 +531,10 @@ tr {
 
   .dash-header__container h1{
     font-size: 35px;
+  }
+
+  .dash-footer{
+    display: block;
   }
 
   .icon-button {

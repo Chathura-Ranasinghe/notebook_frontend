@@ -114,8 +114,6 @@ const EditUserForm = ({ user }) => {
     // Render the form content
     const content = (
         <>
-            <p className={errClass}>{errContent}</p>
-
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
                     <h2>Edit User<br/><span>| {user.username}</span></h2>
@@ -138,13 +136,14 @@ const EditUserForm = ({ user }) => {
                     </div>
                 </div>
                 <label className="form__label" htmlFor="username">
-                    Username: <span className="nowrap">[3-20 letters]</span></label>
+                    Username: <p className={errClass}>{errContent}</p></label>
                 <input
                     className={`form__input ${validUserClass}`}
                     id="username"
                     name="username"
                     type="text"
                     autoComplete="off"
+                    placeholder="3-20 letters"
                     value={username}
                     onChange={onUsernameChanged}
                 />

@@ -92,8 +92,6 @@ const EditNoteForm = ({ note, users }) => {
 
     const content = (
         <>
-            <p className={errClass}>{errContent}</p>
-
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
                     <h2>Edit Note<br/><span>| {note.title}</span></h2>
@@ -110,7 +108,7 @@ const EditNoteForm = ({ note, users }) => {
                     </div>
                 </div>
                 <label className="form__label" htmlFor="note-title">
-                    Title:</label>
+                    Title: <p className={errClass}>{errContent}</p></label>
                 <input
                     className={`form__input ${validTitleClass}`}
                     id="note-title"

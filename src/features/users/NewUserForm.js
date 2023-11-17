@@ -96,8 +96,6 @@ const NewUserForm = () => {
     // Render the form content
     const content = (
         <>
-            <p className={errClass}>{errContent}</p>
-
             <form className="form" onSubmit={onSaveUserClicked}>
                 <div className="form__title-row">
                     <h2>New User</h2>
@@ -112,24 +110,26 @@ const NewUserForm = () => {
                     </div>
                 </div>
                 <label className="form__label" htmlFor="username">
-                    Username: <span className="nowrap">[3-20 letters]</span></label>
+                    Username: <p className={errClass}>{errContent}</p></label>
                 <input
                     className={`form__input ${validUserClass}`}
                     id="username"
                     name="username"
                     type="text"
                     autoComplete="off"
+                    placeholder="3-20 letters"
                     value={username}
                     onChange={onUsernameChanged}
                 />
 
                 <label className="form__label" htmlFor="password">
-                    Password: <span className="nowrap">[4-12 chars incl. !@#$%]</span></label>
+                    Password:</label>
                 <input
                     className={`form__input ${validPwdClass}`}
                     id="password"
                     name="password"
                     type="password"
+                    placeholder="4-12 chars incl. !@#$%"
                     value={password}
                     onChange={onPasswordChanged}
                 />
