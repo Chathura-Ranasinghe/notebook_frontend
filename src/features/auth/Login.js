@@ -58,13 +58,15 @@ const Login = () => {
     const handlePwdInput = (e) => setPassword(e.target.value)
     const handleToggle = () => setPersist(prev => !prev)
 
-    const errClass = errMsg ? "errmsg" : "offscreen"
+    //const errClass = errMsg ? "errmsg loginErr" : "offscreen"
 
     if (isLoading) return <p>Loading...</p>
 
     const content = (
         <section className="public">
-            <div className='layer'></div>
+            <div className='layer'>
+                <p ref={errRef} className={`${errMsg ? "errmsg loginErr" : "offscreen"}`} aria-live="assertive">{errMsg}</p>
+            </div>
             <main className="login">
                 <div>
                     <header className='public__main'>
@@ -108,7 +110,6 @@ const Login = () => {
                 </form>
                 </div>
             </main>
-            <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
             <footer className='footer-button'>
                 <Link to="/">Back to Home</Link>
             </footer>

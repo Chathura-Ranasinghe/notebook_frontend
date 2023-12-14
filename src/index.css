@@ -39,6 +39,17 @@
   text-decoration: underline;
 }
 
+.loginErr {
+  text-align: center;
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border: 1px solid var(--ERROR);
+}
+
+
 .nowrap {
   white-space: nowrap;
 }
@@ -545,6 +556,10 @@ tr {
 
   .welcome h1{
     font-size: 2rem;
+  }
+
+  .loginErr {
+    width: 90%;
   }
 
 }
