@@ -1,8 +1,8 @@
 # Mangala Trade Center (Front End)
 
-## Admin Login
+## Employee Login
 
-### username () : Employee
+### username : Employee
 ### password : 1234
 
 
