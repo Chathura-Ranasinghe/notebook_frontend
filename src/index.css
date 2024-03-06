@@ -163,6 +163,7 @@ a:focus-visible {
   left: 50%;
   flex-grow: 1;
   padding: 1em;
+  text-align: center;
 }
 
 .public .public__main h1{
@@ -488,7 +489,7 @@ tr {
     position: static;
   }
 
-}
+} public__main
 
 @media screen and (max-width: 768px) {
 
